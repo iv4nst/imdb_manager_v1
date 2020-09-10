@@ -13,30 +13,30 @@ try:
     with open('WATCHLIST.csv') as f:
         rows = csv.DictReader(f, delimiter=',', quotechar='"')
         movies = [row for row in rows if row['Title Type'] == 'movie']
+
+    movie = random.choice(movies)
+    text = """There are {num} feature films in your watchlist.
+    
+    I have chosen the following movie for you:
+    
+    ===========================================
+    
+        \x1b[1m{Title}\x1b[0m ({Year})
+    
+        IMDb Rating:    {IMDb Rating}
+        Genres:         {Genres}
+        Runtime:        {Runtime (mins)}min
+        Link:           {URL}
+    
+    ===========================================
+    
+    You have two options:
+    1 - Rate "{Title}" (also removes it from the watchlist)
+    2 - Remove "{Title}" from your watchlist
+    """
+    print(text.format(num=len(movies), **movie))
 except FileNotFoundError:
     print('WATCHLIST.csv not found.')
-
-movie = random.choice(movies)
-text = """There are {num} feature films in your watchlist.
-
-I have chosen the following movie for you:
-
-===========================================
-
-    \x1b[1m{Title}\x1b[0m ({Year})
-
-    IMDb Rating:    {IMDb Rating}
-    Genres:         {Genres}
-    Runtime:        {Runtime (mins)}min
-    Link:           {URL}
-
-===========================================
-
-You have two options:
-1 - Rate "{Title}" (also removes it from the watchlist)
-2 - Remove "{Title}" from your watchlist
-"""
-print(text.format(num=len(movies), **movie))
 
 
 def main():
