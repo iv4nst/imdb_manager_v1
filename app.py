@@ -45,7 +45,7 @@ def main():
             try:
                 # try with chrome web driver
                 options = webdriver.ChromeOptions()
-                # options.headless = True
+                options.headless = True
                 driver = webdriver.Chrome(options=options)
             except:
                 # if that doesn't work try firefox
