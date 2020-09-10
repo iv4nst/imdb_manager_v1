@@ -9,9 +9,12 @@ from functions import *
 # =================================
 
 # Open the watchlist .csv file and choose a random movie
-with open('WATCHLIST.csv') as f:
-    rows = csv.DictReader(f, delimiter=',', quotechar='"')
-    movies = [row for row in rows if row['Title Type'] == 'movie']
+try:
+    with open('WATCHLIST.csv') as f:
+        rows = csv.DictReader(f, delimiter=',', quotechar='"')
+        movies = [row for row in rows if row['Title Type'] == 'movie']
+except FileNotFoundError:
+    print('WATCHLIST.csv not found.')
 
 movie = random.choice(movies)
 text = """There are {num} feature films in your watchlist.
