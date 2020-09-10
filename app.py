@@ -3,6 +3,7 @@ import random
 import csv
 from selenium import webdriver
 from functions import *
+import os
 
 # =================================
 # CHOOSE A RANDOM MOVIE
@@ -21,7 +22,7 @@ try:
     
     ===========================================
     
-        \x1b[1m{Title}\x1b[0m ({Year})
+        {Title} ({Year})
     
         IMDb Rating:    {IMDb Rating}
         Genres:         {Genres}
@@ -49,11 +50,13 @@ def main():
                 # try with chrome web driver
                 options = webdriver.ChromeOptions()
                 options.headless = True
+                options.add_experimental_option('excludeSwitches', ['enable-logging'])
                 driver = webdriver.Chrome(options=options)
             except:
                 # if that doesn't work try firefox
                 options = webdriver.FirefoxOptions()
                 options.headless = True
+                options.set_preference('excludeSwitches', ['enable-logging'])
                 driver = webdriver.Firefox(options=options)
 
             if choice == 1:  # rate the movie on IMDb
@@ -77,3 +80,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    os.system('pause')

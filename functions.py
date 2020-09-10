@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
-from settings import EMAIL, PASS
 
 
 # open the IMDb page of the random chosen movie
@@ -19,6 +18,9 @@ def locate_movie(driver, movie):
         EC.element_to_be_clickable((By.CSS_SELECTOR, '#signin-options > div > div:nth-child(2) > a:nth-child(1)')))
     sign_in_imdb.click()
 
+    EMAIL = input('Enter your IMDb email address: ')
+    PASS = input('Enter your IMDb password: ')
+
     email = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#ap_email')))
     email.send_keys(EMAIL)
     password = driver.find_element_by_css_selector('#ap_password')
@@ -26,6 +28,8 @@ def locate_movie(driver, movie):
 
     sign_in_submit = driver.find_element_by_css_selector('#signInSubmit')
     sign_in_submit.click()
+
+    print('Signed in.')
 
 
 # rate the movie
@@ -79,6 +83,8 @@ def rate_movie(driver, movie):
         rate_star = driver.find_element_by_css_selector(
             '#star-rating-widget > div > div > span:nth-child(1) > span > a:nth-child(10)')
         rate_star.click()
+
+    print('"{Title}" rated.'.format(**movie))
 
 
 # remove the movie from the watchlist
