@@ -1,9 +1,16 @@
-import install_requirements
 import random
 import csv
-from selenium import webdriver
-from functions import *
+import subprocess
+import sys
 import os
+
+try:
+    import selenium
+    from selenium import webdriver
+except ImportError:
+    subprocess.call([sys.executable, '-m', 'pip', 'install', selenium])
+
+from functions import *
 
 # =================================
 # CHOOSE A RANDOM MOVIE
@@ -17,20 +24,20 @@ try:
 
     movie = random.choice(movies)
     text = """There are {num} feature films in your watchlist.
-    
+
     I have chosen the following movie for you:
-    
+
     ===========================================
-    
+
         {Title} ({Year})
-    
+
         IMDb Rating:    {IMDb Rating}
         Genres:         {Genres}
         Runtime:        {Runtime (mins)}min
         Link:           {URL}
-    
+
     ===========================================
-    
+
     You have two options:
     1 - Rate "{Title}" (also removes it from the watchlist)
     2 - Remove "{Title}" from your watchlist
@@ -51,13 +58,13 @@ def main():
                 options = webdriver.ChromeOptions()
                 options.headless = True
                 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-                driver = webdriver.Chrome(options=options)
+                driver = webdriver.Chrome(options=options, service_log_path='nul')
             except:
                 # if that doesn't work try firefox
                 options = webdriver.FirefoxOptions()
                 options.headless = True
-                options.set_preference('excludeSwitches', ['enable-logging'])
-                driver = webdriver.Firefox(options=options)
+                options.set_preference('devtools.jsonview.enabled', False)
+                driver = webdriver.Firefox(options=options, service_log_path='nul')
 
             if choice == 1:  # rate the movie on IMDb
                 print('You chose to rate "{Title}".'.format(**movie))
