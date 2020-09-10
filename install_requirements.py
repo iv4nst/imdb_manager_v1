@@ -30,10 +30,10 @@ except FileNotFoundError:
 if len(required) > 0:
     for package in required:
         try:
-            print('[LOG] Looking for', package)
+            # print('[LOG] Looking for', package)
             with contextlib.redirect_stdout(None):
                 __import__(package)
-            print('[LOG]', package, 'is already installed, skipping...')
+            # print('[LOG]', package, 'is already installed, skipping...')
         except ImportError:
             print('[LOG]', package, 'not installed')
 
