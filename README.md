@@ -19,7 +19,9 @@ Make sure to add "Scripts" folder to ```PATH``` so it can load properly
 
 ## Usage
 
-You should download your own WATCHLIST.csv file from your IMDb account (for now**):
+A demo WATCHLIST.csv is included, but you should download your own so it can work properly with your account.
+
+To download your own WATCHLIST.csv file from your IMDb account (for now**):
 * Login to your account
 * Go to Watchlist
 * Scroll all the way down and click ```Export this list```
